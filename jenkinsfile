@@ -6,7 +6,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        git 'https://github.com/sgandeplli/ansible_terra.git' , branch: "main"
+        git url: 'https://github.com/sgandeplli/ansible_terra.git' , branch: "main"
       }
     }
     stage('Terraform Init') {
