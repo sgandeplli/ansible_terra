@@ -3,12 +3,12 @@
   tasks:
     - name: Install httpd service
       yum:
-        name: apache2
+        name: httpd
         state: present
         update_cache: yes
 
     - name: Start httpd service
       service:
-        name: apache2
+        name: httpd
         state: started
         enabled: true
