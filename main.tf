@@ -4,7 +4,7 @@ provider "google" {
 }
 
 resource "google_compute_instance" "vm_instance" {
-  name         = "web-server-instance"
+  name         = "ansible"
   machine_type = "e2-micro"
   zone         = "us-central1-a"
 
