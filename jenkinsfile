@@ -1,0 +1,40 @@
+pipeline {
+  agent any
+ environment {
+        GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp-sa')
+    }
+  stages {
+    stage('Checkout') {
+      steps {
+        git 'https://github.com/sgandeplli/ansible_terra.git'
+      }
+    }
+    stage('Terraform Init') {
+      steps {
+        sh 'terraform init'
+      }
+    }
+    stage('Terraform Apply') {
+      steps {
+        script {
+          sh 'terraform apply -auto-approve'
+        }
+      }
+    }
+    stage('Get Instance IP') {
+      steps {
+        script {
+          env.INSTANCE_IP = sh(script: "terraform output -raw instance_ip", returnStdout: true).trim()
+          echo "Instance IP: ${env.INSTANCE_IP}"
+        }
+      }
+    }
+    stage('Ansible Setup') {
+      steps {
+        script {
+          sh "ansible-playbook -i ${env.INSTANCE_IP}, ansible-playbook.yml"
+        }
+      }
+    }
+  }
+}
