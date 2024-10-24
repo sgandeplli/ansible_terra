@@ -12,7 +12,7 @@ resource "google_compute_instance" "vm_instance" {
 
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-11"
+      image = "centos-cloud/centos-stream-9"
     }
   }
 
@@ -27,8 +27,8 @@ resource "google_compute_instance" "vm_instance" {
 
   metadata_startup_script = <<-EOT
     #!/bin/bash
-    sudo apt-get update
-    sudo apt-get install -y apache2
+    sudo yum update
+    sudo yum install -y apache2
     sudo systemctl start apache2
   EOT
 }
