@@ -28,8 +28,8 @@ resource "google_compute_instance" "vm_instance" {
   metadata_startup_script = <<-EOT
     #!/bin/bash
     sudo yum update
-    sudo yum install -y apache2
-    sudo systemctl start apache2
+    sudo yum install -y httpd
+    sudo systemctl start httpd
   EOT
 }
 
