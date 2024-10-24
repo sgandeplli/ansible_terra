@@ -22,7 +22,7 @@ resource "google_compute_instance" "vm_instance" {
   }
 
   metadata = {
-    ssh-keys = "root:${file("/root/.ssh/id_rsa.pub")}"
+    ssh-keys = "root:${file("/root/.ssh/id_rsa")}"
   }
 
   metadata_startup_script = <<-EOT
